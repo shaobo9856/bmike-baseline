@@ -177,16 +177,15 @@ class BaseEditor:
         if hasattr(self.hparams, 'batch_size') and not BatchEditor.is_batchable_method(self.alg_name):  # For Singleton Editing, bs=1
             assert self.hparams.batch_size == 1, 'Single Editing: batch_size should be set to 1'
 
-        if ground_truth is not None:
-            ground_truth = [ground_truth,] if isinstance(ground_truth, str) else ground_truth
-        else:# Default ground truth is <|endoftext|>
-            ground_truth = ['<|endoftext|>'] * (len(prompts))
+        # if ground_truth is not None:
+        #     ground_truth = [ground_truth,] if isinstance(ground_truth, str) else ground_truth
+        # else:# Default ground truth is <|endoftext|>
+        #     ground_truth = ['<|endoftext|>'] * (len(prompts))
 
         if "requests" in kwargs.keys():
             requests = kwargs["requests"]
         else:
-            requests = _prepare_requests(prompts, target_new, ground_truth, target_neg, rephrase_prompts, locality_inputs, portability_inputs, **kwargs)
-
+            requests = _prepare_requests(prompts, target_new, edited_inputs, cross_inputs,  generalization_inputs, locality_inputs, portability_inputs, **kwargs) #ground_truth,
         return self.edit_requests(requests, sequential_edit, verbose, test_generation=test_generation, **kwargs)
 
     def batch_edit(self,

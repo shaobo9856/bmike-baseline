@@ -46,9 +46,9 @@ if __name__ == "__main__":
         editing_hparams = LoRAHyperParams
     else:
         raise NotImplementedError
+        
     # /data
-    # /data1/MultiKnow/data/BMIKE53
-    test_data = json.load(open(f'./data1/MultiKnow/data/BMIKE53/{args.data_dir}{args.lang2}.json', 'r', encoding='utf-8'))
+    test_data = json.load(open(f'./data/BMIKE53/{args.data_dir}{args.lang2}.json', 'r', encoding='utf-8'))
 
     if args.ds_size is not None:
         test_data = random.sample(test_data, args.ds_size)
