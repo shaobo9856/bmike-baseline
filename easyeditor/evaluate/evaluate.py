@@ -141,9 +141,11 @@ def compute_rewrite_or_rephrase_quality(
         if 't5' in model_name.lower():
             acc = test_seq2seq_batch_prediction_acc(model, tok, hparams, prompt, target_new, device)
         else:
-            acc = test_prediction_acc(model, tok, hparams, prompt, target_new, device)
+            # acc = test_prediction_acc(model, tok, hparams, prompt, target_new, device)
+            ans = test_prediction_acc(model, tok, hparams, prompt, target_new, device,locality=True)
         ret = {
-            f"{key}_acc": acc
+            # f"{key}_acc": acc
+            f"{key}": {"ans":tok.decode(ans[0]), "target":target_new}
         }
     return ret
 
