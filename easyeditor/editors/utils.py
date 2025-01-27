@@ -56,9 +56,12 @@ def summary_metrics(all_metrics):
 
 def _prepare_requests(prompts: Union[str, List[str]],
                       target_new: Union[str, List[str]],
-                      ground_truth: Union[str, List[str]],
-                      target_neg: Optional[Union[str, List[str]]] = None,
-                      rephrase_prompts: Optional[Union[str, List[str]]] = None,
+                      edited_inputs: Optional[Dict] = None,
+                      cross_inputs: Optional[Dict] = None,
+                      generalization_inputs: Optional[Dict] = None,
+                    #   ground_truth: Union[str, List[str]],
+                    #   target_neg: Optional[Union[str, List[str]]] = None,
+                    #   rephrase_prompts: Optional[Union[str, List[str]]] = None,
                       locality_inputs: Optional[Dict] = None,
                       portability_inputs: Optional[Dict] = None,
                       **kwargs

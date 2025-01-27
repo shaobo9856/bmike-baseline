@@ -107,9 +107,9 @@ def compute_rewrite_or_rephrase_quality(
 ) -> typing.Dict:
     
     if not test_rephrase:
-        key = 'rewrite'
+        key = 'reliability'
     else:
-        key = 'rephrase'
+        key = 'generalization'
     if eval_metric == 'ppl':
         ppl = PPL(model, tok, prompt, target_new, device)
         ret = {
@@ -128,9 +128,10 @@ def compute_rewrite_or_rephrase_quality(
             acc = test_prediction_acc(model, tok, hparams, prompt, target_new, device, vanilla_generation=True)
         f1 = F1(model,tok,hparams,prompt,target_new,device, vanilla_generation=True)
         ret = {
-            f"{key}_acc": acc,
+            # f"{key}_acc": acc,
             # f"{key}_PPL": ppl,
-            f"{key}_F1":f1     
+            f"{key}_F1":f1
+            # f"{key}_out": {"ans":ans, "target":target_new}
         }        
     else:
         if 't5' in model_name.lower():
@@ -162,7 +163,8 @@ def compute_locality_quality(
         loc_tokens = [loc_tokens,]
 
     ret = {
-        f"{locality_key}_output": loc_tokens
+        # f"{locality_key}_output": loc_tokens
+        f"{locality_key}_acc": {"ans":tok.decode(loc_tokens[0]), "target":locality_ground_truth}
     }
     return ret
 
@@ -180,10 +182,12 @@ def compute_portability_quality(
     if 't5' in model_name.lower():
         portability_correct = test_seq2seq_batch_prediction_acc(model, tok, hparams, prompt, ground_truth, device)
     else:
-        portability_correct = test_prediction_acc(model, tok, hparams, prompt, ground_truth, device, vanilla_generation=hparams.alg_name=='GRACE')
+        # portability_correct = test_prediction_acc(model, tok, hparams, prompt, ground_truth, device, vanilla_generation=hparams.alg_name=='GRACE')
+        ans = test_prediction_acc(model, tok, hparams, prompt, ground_truth, device, locality=True)
 
     ret = {
-        f"{portability_key}_acc": portability_correct
+        # f"{portability_key}_acc": portability_correct
+        f"{portability_key}_acc": {"ans":tok.decode(ans[0]), "target":ground_truth}
     }
     return ret
 
