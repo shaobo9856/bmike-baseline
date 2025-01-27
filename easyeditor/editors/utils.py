@@ -185,24 +185,6 @@ def _prepare_requests(prompts: Union[str, List[str]],
                 )
                 request['ground_truth'] = locality_inputs[locality_key]['ground_truth'][i]
 
-    # if locality_inputs is not None:
-    for locality_key in locality_inputs.keys():
-        # if isinstance(locality_inputs[locality_key]['prompt'], str):
-        #     locality_inputs[locality_key]['prompt'] = [locality_inputs[locality_key]['prompt'],]
-        #     locality_inputs[locality_key]['ground_truth'] = [locality_inputs[locality_key]['ground_truth'], ]
-        # assert len(locality_inputs[locality_key]['prompt']) == len(locality_inputs[locality_key]['ground_truth']) \
-        # == len(requests), print('One Edit instance needs one locality input.....')
-
-        for i, request in enumerate(requests):
-            if locality_inputs[locality_key]['prompt'][i] is not None:
-                request['locality'].update(
-                    {
-                        locality_key: {
-                            f'prompt': locality_inputs[locality_key]['prompt'][i],
-                            f'ground_truth': locality_inputs[locality_key]['ground_truth'][i]
-                        }
-                    }
-                )
 
     # if portability_inputs is not None:
     for portability_key in portability_inputs.keys():
