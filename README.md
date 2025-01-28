@@ -1,3 +1,28 @@
+
+**Run scripts:**
+chmod +x run_FT.sh
+./run_FT.sh
+
+chmod +x run_KN.sh
+./run_KN.sh
+
+chmod +x run_MEMIT.sh
+./run_MEMIT.sh
+
+nohup ./run_KN.sh > output_KN.log 2>&1 &
+nohup ./run_KN.sh > output_KN.log 2>&1 &
+
+
+
+
+**Data validation:**
+python data_translate_texts.py ./data/MzsRE ./data/MzsRE/result
+
+python data_compute_bleu_scores.py ./data/MzsRE/result
+
+python data_compute_semantic_similarity.py ./data/MzsRE/result
+
+
 <div align="center">
 <img src="figs/logo.png" width="180px">
 
