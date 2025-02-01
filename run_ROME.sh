@@ -1,8 +1,18 @@
 #!/bin/bash
 
-LANGS=("vi" "es") #"es"  "ru" "zh"
-DATAS=("zsRE/zsre_test_" "CounterFact/counterfact_test_" "WikiFactDiff/wfd_test_")
-CUDA=3
+LANGS=("ar" "he" "fa" "de" "fr" "zh" "ja" "hu" "ru" "tr") #"vi" "es"  "ru" "zh"  "es" # "ar" "he" "fa" "de" "fr" "zh" "ja" "hu" "ru" "tr"
+DATAS=("CounterFact/counterfact_test_") # "zsRE/zsre_test_" "CounterFact/counterfact_test_"  "WikiFactDiff/wfd_test_"
+CUDA=0
+
+echo "Validating files..."
+for DATA in "${DATAS[@]}"; do
+    for LANG in "${LANGS[@]}"; do
+        FILE="./data/BMIKE53/${DATA}${LANG}.json"
+        if [ ! -f "$FILE" ]; then
+            echo "Missing file: $FILE"
+        fi
+    done
+done
 
 for DATA in "${DATAS[@]}";do
     for LANG in "${LANGS[@]}";do

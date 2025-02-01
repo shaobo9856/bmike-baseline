@@ -44,6 +44,8 @@ if __name__ == "__main__":
         editing_hparams = ROMEHyperParams
     elif args.editing_method == 'LoRA':
         editing_hparams = LoRAHyperParams
+    elif args.editing_method == 'MEND':
+        editing_hparams = MENDHyperParams
     else:
         raise NotImplementedError
         
@@ -56,7 +58,15 @@ if __name__ == "__main__":
     else:
         ds_size = 0
     prompts_truth = [test_data_[args.lang1]['src'] for test_data_ in test_data]
+    print("1111111")
+    for test_data_ in test_data:
+        print(test_data_)
+        print(test_data_[args.lang2])
+        print("test_data_[args.lang2]['src']" + test_data_[args.lang2]['src'])
+        print("22222")
+    print("333333")
     prompts_test = [test_data_[args.lang2]['src'] for test_data_ in test_data] 
+
 
     target_truth = [edit_data_[args.lang1]['alt'] for edit_data_ in test_data]
     target_test = [edit_data_[args.lang2]['alt'] for edit_data_ in test_data] # test in chinese

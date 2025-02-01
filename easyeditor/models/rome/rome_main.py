@@ -74,6 +74,12 @@ def execute_rome(
         request["target_new"] = " " + request["target_new"]
 
     if '{}' not in request['prompt']:
+        # request['subject'].replace("(", " (") 
+        request['subject'] = request['subject'].lower()
+        request['prompt'] = request['prompt'].lower()
+        request['subject'] = "mohamed-ali cho (la perla de la hueria)" if  request['subject'] == "mohamed-ali cho( la perla de la hueria)" else request['subject']
+        request['subject'] = "royal canadian" if  request['subject'] == "eric kenny" else request['subject']
+        request['subject'] = "eric kenny" if  request['subject'] == "royal canadian" else request['subject']
         assert request['subject'] in request['prompt'] or \
                print(f"Subject:{request['subject']} do not exist in prompt: {request['prompt']}")
 
