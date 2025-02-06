@@ -1,6 +1,6 @@
 #!/bin/bash
 
-LANGS=("ar" "he" "fa" "de" "fr" "zh" "ja" "hu" "ru" "tr") #"vi" "es"  "ru" "zh"  "es" # "ar" "he" "fa" "de" "fr" "zh" "ja" "hu" "ru" "tr"
+LANGS=("he" "hu") #"vi" "es"  "ru" "zh"  "es" # "ar" "he" "fa" "de" "fr" "zh" "ja" "hu" "ru" "tr"
 DATAS=("CounterFact/counterfact_test_") # "zsRE/zsre_test_" "CounterFact/counterfact_test_"  "WikiFactDiff/wfd_test_"
 CUDA=3
 

@@ -1,8 +1,8 @@
 #!/bin/bash
 
 LANGS=("ar" "he" "fa" "de" "fr" "zh" "ja" "hu" "ru" "tr") #"vi" "es"  "ru" "zh"  "es" # "ar" "he" "fa" "de" "fr" "zh" "ja" "hu" "ru" "tr"
-DATAS=("CounterFact/counterfact_test_") # "zsRE/zsre_test_" "CounterFact/counterfact_test_"  "WikiFactDiff/wfd_test_"
-CUDA=0
+DATAS=("zsRE/zsre_test_") # "zsRE/zsre_test_" "CounterFact/counterfact_test_"  "WikiFactDiff/wfd_test_"
+CUDA=1
 
 echo "Validating files..."
 for DATA in "${DATAS[@]}"; do

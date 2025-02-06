@@ -57,27 +57,27 @@ if __name__ == "__main__":
         ds_size = args.ds_size
     else:
         ds_size = 0
+
+    #filter out data which dont have lang2
+    test_data = [data for data in test_data if args.lang2 in data]
+
     prompts_truth = [test_data_[args.lang1]['src'] for test_data_ in test_data]
-    print("1111111")
-    for test_data_ in test_data:
-        print(test_data_)
-        print(test_data_[args.lang2])
-        print("test_data_[args.lang2]['src']" + test_data_[args.lang2]['src'])
-        print("22222")
-    print("333333")
+    # print("1111111")
+    # for test_data_ in test_data:
+    #     print(test_data_)
+    #     print(test_data_[args.lang2])
+    #     print("test_data_[args.lang2]['src']" + test_data_[args.lang2]['src'])
+    #     print("22222")
+    # print("333333")
     prompts_test = [test_data_[args.lang2]['src'] for test_data_ in test_data] 
-
-
     target_truth = [edit_data_[args.lang1]['alt'] for edit_data_ in test_data]
     target_test = [edit_data_[args.lang2]['alt'] for edit_data_ in test_data] # test in chinese
-
     rephrase_prompts = [edit_data_[args.lang2]['rephrase'] for edit_data_ in test_data]
     locality_prompts = [edit_data_[args.lang2]['loc'] for edit_data_ in test_data]
     locality_ans = [edit_data_[args.lang2]['loc_ans'] for edit_data_ in test_data]
-    # portability_prompts = [edit_data_[args.lang2]['portability']['New Question'] for edit_data_ in test_data]
-    # portability_ans = [edit_data_[args.lang2]['portability']['New Answer'] for edit_data_ in test_data]
     portability_prompts = [edit_data_[args.lang2]['port'] for edit_data_ in test_data]
     portability_ans = [edit_data_[args.lang2]['port_ans'] for edit_data_ in test_data]
+    subject = [edit_data_[args.lang1]['subject'] for edit_data_ in test_data]
 
     edited_inputs = {
         'edited_english': {
@@ -109,7 +109,6 @@ if __name__ == "__main__":
             'ground_truth': portability_ans
         },
     }
-    subject = [edit_data_[args.lang1]['subject'] for edit_data_ in test_data]
     hparams = editing_hparams.from_hparams(args.hparams_dir)
 
     # if args.editing_method == 'IKE':
