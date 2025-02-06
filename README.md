@@ -1,3 +1,12 @@
+**安装依赖**
+pip install -r requirements.txt
+
+**单实验测试**
+
+示例：
+## ROME - zsRE - lang:vi
+nohup bash -c "CUDA_VISIBLE_DEVICES=0 python run_zsre_llama2.py --editing_method ROME --hparams_dir ./hparams/ROME/llama3.2-3b --data_dir zsRE/zsre_test_ --lang1 en --lang2 vi " > ./logs/output_ROME.log 2>&1 &
+
 
 **Run scripts:**
 chmod +x run_FT.sh
@@ -6,12 +15,27 @@ chmod +x run_FT.sh
 chmod +x run_KN.sh
 ./run_KN.sh
 
-chmod +x run_MEMIT.sh
+chmod +x run_MEMIT.sh  #不要设置cuda number
 ./run_MEMIT.sh
 
-nohup ./run_KN.sh > output_KN.log 2>&1 &
-nohup ./run_KN.sh > output_KN.log 2>&1 &
+chmod +x run_ROME.sh
+./run_ROME.sh
 
+chmod +x run_MEND.sh
+./run_MEND.sh
+
+chmod +x run_LoRA.sh
+./run_LoRA.sh
+
+**带log运行脚本**
+需要提前在脚本中指定GPU编号
+nohup ./run_ROME.sh > ./logs/output_ROME.log 2>&1 &
+nohup ./run_KN.sh > ./logs/output_KN.log 2>&1 &
+nohup ./run_LoRA.sh > ./logs/output_LoRA.log 2>&1 &
+nohup ./run_FT.sh > ./logs/output_FT.log 2>&1 &
+
+**evaluation脚本**
+nohup bash -c "CUDA_VISIBLE_DEVICES=0 python evaluate_test.py --dataset Coun" > ./logs/output_evaluate.log 2>&1 &
 
 
 
@@ -21,6 +45,11 @@ python data_translate_texts.py ./data/MzsRE ./data/MzsRE/result
 python data_compute_bleu_scores.py ./data/MzsRE/result
 
 python data_compute_semantic_similarity.py ./data/MzsRE/result
+
+
+**常用监控命令**
+nvidia-smi
+ps aux | grep python
 
 
 <div align="center">
