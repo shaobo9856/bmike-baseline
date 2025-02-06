@@ -6,6 +6,7 @@ pip install -r requirements.txt
 **单实验测试**
 
 示例：
+
 ROME - zsRE - lang:vi
 nohup bash -c "CUDA_VISIBLE_DEVICES=0 python run_zsre_llama2.py --editing_method ROME --hparams_dir ./hparams/ROME/llama3.2-3b --data_dir zsRE/zsre_test_ --lang1 en --lang2 vi " > ./logs/output_ROME.log 2>&1 &
 
@@ -13,21 +14,27 @@ nohup bash -c "CUDA_VISIBLE_DEVICES=0 python run_zsre_llama2.py --editing_method
 ## Run scripts:
 
 chmod +x run_FT.sh
+
 ./run_FT.sh
 
 chmod +x run_KN.sh
+
 ./run_KN.sh
 
 chmod +x run_MEMIT.sh  #不要设置cuda number
+
 ./run_MEMIT.sh
 
 chmod +x run_ROME.sh
+
 ./run_ROME.sh
 
 chmod +x run_MEND.sh
+
 ./run_MEND.sh
 
 chmod +x run_LoRA.sh
+
 ./run_LoRA.sh
 
 **带log运行脚本**
@@ -35,8 +42,11 @@ chmod +x run_LoRA.sh
 需要提前在脚本中指定GPU编号
 
 nohup ./run_ROME.sh > ./logs/output_ROME.log 2>&1 &
+
 nohup ./run_KN.sh > ./logs/output_KN.log 2>&1 &
+
 nohup ./run_LoRA.sh > ./logs/output_LoRA.log 2>&1 &
+
 nohup ./run_FT.sh > ./logs/output_FT.log 2>&1 &
 
 **evaluation脚本**
