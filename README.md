@@ -1,72 +1,90 @@
-## 安装依赖
+# 🧬 Multilingual Knowledge Editing (Baseline)
 
+## 📦 Installation
+
+Install required dependencies:
+
+```bash
 pip install -r requirements.txt
 
+## 🧪 Run a Single Experiment
 
-**单实验测试**
+Example: Run ROME on zsRE dataset (from English to Vietnamese):
+ 
+```bash
+nohup bash -c "CUDA_VISIBLE_DEVICES=0 python run_zsre_llama2.py \
+  --editing_method ROME \
+  --hparams_dir ./hparams/ROME/llama3.2-3b \
+  --data_dir zsRE/zsre_test_ \
+  --lang1 en \
+  --lang2 vi" > ./logs/output_ROME.log 2>&1 &
 
-示例：
 
-ROME - zsRE - lang:vi
-nohup bash -c "CUDA_VISIBLE_DEVICES=0 python run_zsre_llama2.py --editing_method ROME --hparams_dir ./hparams/ROME/llama3.2-3b --data_dir zsRE/zsre_test_ --lang1 en --lang2 vi " > ./logs/output_ROME.log 2>&1 &
+## 🚀 Run All Editing Methods
 
-
-## Run scripts:
-
+Make scripts executable:
+ 
+```bash
 chmod +x run_FT.sh
-
-./run_FT.sh
-
 chmod +x run_KN.sh
-
-./run_KN.sh
-
-chmod +x run_MEMIT.sh  #不要设置cuda number
-
-./run_MEMIT.sh
-
+chmod +x run_MEMIT.sh  # Do not manually set CUDA number
 chmod +x run_ROME.sh
-
-./run_ROME.sh
-
 chmod +x run_MEND.sh
-
-./run_MEND.sh
-
 chmod +x run_LoRA.sh
 
+Run each method:
+```bash
+./run_FT.sh
+./run_KN.sh
+./run_MEMIT.sh
+./run_ROME.sh
+./run_MEND.sh
 ./run_LoRA.sh
 
-**带log运行脚本**
 
-需要提前在脚本中指定GPU编号
 
+
+## 📝 Run Scripts with Logging
+
+Ensure CUDA_VISIBLE_DEVICES is set within each script before running via nohup.
+ 
+```bash
 nohup ./run_ROME.sh > ./logs/output_ROME.log 2>&1 &
-
 nohup ./run_KN.sh > ./logs/output_KN.log 2>&1 &
-
 nohup ./run_LoRA.sh > ./logs/output_LoRA.log 2>&1 &
-
 nohup ./run_FT.sh > ./logs/output_FT.log 2>&1 &
 
-**evaluation脚本**
 
+## ✅ Evaluation
+
+Run evaluation for a specific dataset (e.g., Coun):
+ 
+```bash
 nohup bash -c "CUDA_VISIBLE_DEVICES=0 python evaluate_test.py --dataset Coun" > ./logs/output_evaluate.log 2>&1 &
 
+## ✅ Evaluation
+Translate texts:
 
-
-**Data validation:**
-
+```bash
 python data_translate_texts.py ./data/MzsRE ./data/MzsRE/result
 
+Compute BLEU scores:
+
+```bash
 python data_compute_bleu_scores.py ./data/MzsRE/result
 
+Compute semantic similarity:
+
+```bash
 python data_compute_semantic_similarity.py ./data/MzsRE/result
 
 
-**常用监控命令**
-nvidia-smi
-ps aux | grep python
+## 📊 Monitoring Commands
+
+```bash
+nvidia-smi                  # Monitor GPU usage
+ps aux | grep python        # Check running Python processes
+
 
 
 <div align="center">
